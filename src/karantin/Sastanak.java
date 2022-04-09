@@ -1,7 +1,8 @@
 package karantin;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 public class Sastanak implements Comparable<Sastanak> {
 
@@ -13,7 +14,7 @@ public class Sastanak implements Comparable<Sastanak> {
 
     private boolean aktivan;
 
-    private List<UcesnikSastanka> ucesnici = new ArrayList<>();
+    private Set<UcesnikSastanka> ucesnici = new HashSet<>();
 
     private Nastavnik domacin;
 
@@ -24,11 +25,11 @@ public class Sastanak implements Comparable<Sastanak> {
     }
 
     public void dodajUcesnika(UcesnikSastanka ucesnikSastanka) {
-
+        this.ucesnici.add(ucesnikSastanka);
     }
 
     public void ukloniUcesnika(UcesnikSastanka ucesnikSastanka) {
-
+        this.ucesnici.remove(ucesnikSastanka);
     }
 
     public String getPredmet() {
@@ -63,11 +64,11 @@ public class Sastanak implements Comparable<Sastanak> {
         this.aktivan = aktivan;
     }
 
-    public List<UcesnikSastanka> getUcesnici() {
+    public Set<UcesnikSastanka> getUcesnici() {
         return ucesnici;
     }
 
-    public void setUcesnici(List<UcesnikSastanka> ucesnici) {
+    public void setUcesnici(Set<UcesnikSastanka> ucesnici) {
         this.ucesnici = ucesnici;
     }
 
@@ -81,7 +82,33 @@ public class Sastanak implements Comparable<Sastanak> {
 
     @Override
     public int compareTo(Sastanak sastanak) {
-        return 0;
+        /*if (this.satPocetka < sastanak.satPocetka)
+            return -1;
+        if (this.satPocetka > sastanak.satPocetka)
+            return 1;
+        if (this.satZavrsetka < sastanak.satZavrsetka)
+            return -1;
+        if (this.satZavrsetka > sastanak.satZavrsetka)
+            return 1;*/
+        int a = Integer.valueOf(this.satPocetka)
+                .compareTo(sastanak.satPocetka);
+        if (a != 0)
+            return a;
+        return Integer.valueOf(this.satZavrsetka)
+                .compareTo(sastanak.satZavrsetka);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Sastanak sastanak = (Sastanak) o;
+        return satPocetka == sastanak.satPocetka && satZavrsetka == sastanak.satZavrsetka;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(satPocetka, satZavrsetka);
     }
 
     @Override

@@ -24,11 +24,19 @@ public class CentralniRegistar {
     }
 
     public void pokreniSastanak(Sastanak sastanak, Nastavnik nastavnik) {
-
+        if (sastanak != null && nastavnik == sastanak.getDomacin()
+                && !sastanak.isAktivan()) {
+            sastanak.setAktivan(true);
+        }
     }
 
     public void zavrsiSastanak(Sastanak sastanak, Nastavnik nastavnik) {
-
+        if (sastanak != null && nastavnik == sastanak.getDomacin()
+                && sastanak.isAktivan()) {
+            sastanak.setAktivan(false);
+            this.odrzaniSastanci.add(sastanak);
+            this.zakazaniSastanci.remove(sastanak);
+        }
     }
 
     public void stampajPrisustvoSortirano() {
