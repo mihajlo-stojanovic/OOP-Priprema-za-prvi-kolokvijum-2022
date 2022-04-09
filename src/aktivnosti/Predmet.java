@@ -1,5 +1,7 @@
 package aktivnosti;
 
+import java.util.Objects;
+
 public class Predmet {
 
     private String naziv;
@@ -36,5 +38,13 @@ public class Predmet {
 
     public void setSemestar(int semestar) {
         this.semestar = semestar;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Predmet predmet = (Predmet) o;
+        return Objects.equals(naziv, predmet.naziv);
     }
 }

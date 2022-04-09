@@ -52,4 +52,13 @@ public abstract class AktivnostStudenta
     public void setDan(int dan) {
         this.dan = dan;
     }
+
+    @Override
+    public String toString() {
+        return "AktivnostStudenta{" +
+                "godina=" + godina +
+                ", mesec=" + mesec +
+                ", dan=" + dan +
+                '}';
+    }
 }
