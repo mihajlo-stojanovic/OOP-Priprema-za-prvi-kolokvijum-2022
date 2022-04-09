@@ -20,7 +20,15 @@ public class UpisGodine extends AktivnostStudenta {
 
     @Override
     public boolean proveriUslov(Student student) {
-        return false;
+        if (godinaKojuUpisuje == 1)
+            return true;
+        int uslov = 60 * this.godinaKojuUpisuje - 90;
+        student.getAktivnosti().sort(null);
+        AktivnostStudenta aktivnost = student.getAktivnosti().get(
+                student.getAktivnosti().size() - 1);
+        if (aktivnost.getGodinaStudija() != this.godinaKojuUpisuje - 1)
+            return false;
+        return student.getEspb() >= uslov;
     }
 
     public int getGodinaKojuUpisuje() {

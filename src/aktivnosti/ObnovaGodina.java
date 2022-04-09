@@ -1,6 +1,7 @@
 package aktivnosti;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ObnovaGodina extends AktivnostStudenta {
@@ -20,7 +21,12 @@ public class ObnovaGodina extends AktivnostStudenta {
 
     @Override
     public boolean proveriUslov(Student student) {
-        return false;
+        if (student.getAktivnosti().isEmpty())
+            return false;
+        Collections.sort(student.getAktivnosti());
+        AktivnostStudenta aktivnost = student.getAktivnosti()
+                .get(student.getAktivnosti().size() - 1);
+        return aktivnost.getGodinaStudija() == godinaObnove;
     }
 
     public int getGodinaObnove() {

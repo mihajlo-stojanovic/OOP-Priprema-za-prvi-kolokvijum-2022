@@ -15,16 +15,36 @@ public class Student {
 
     private List<Predmet> polozeniPredmeti = new ArrayList<>();
 
-    public boolean dodajAktivnost(AktivnostStudenta aktivnostStudenta) {
+    public int getEspb() {
+        int res = 0;
+        for (Predmet predmet : polozeniPredmeti) {
+            res += predmet.getEspb();
+        }
+        return res;
+    }
+
+    public boolean dodajAktivnost(AktivnostStudenta aktivnost) {
+        if (aktivnost.proveriUslov(this)) {
+            this.aktivnosti.add(aktivnost);
+            return true;
+        }
         return false;
     }
 
     public int vratiGodinuStudija() {
-        return 0;
+        if (this.aktivnosti.isEmpty())
+            return 0;
+        this.aktivnosti.sort(null);
+        return this.aktivnosti.get(this.aktivnosti.size() - 1)
+                .getGodinaStudija();
     }
 
     public boolean jePonovac() {
-        return false;
+        if (this.aktivnosti.size() < 2)
+            return false;
+        this.aktivnosti.sort(null);
+        return this.aktivnosti.get(this.aktivnosti.size() - 1)
+                instanceof ObnovaGodina;
     }
 
     public boolean slusaPredmet(Predmet predmet) {
