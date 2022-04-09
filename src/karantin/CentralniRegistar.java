@@ -1,5 +1,8 @@
 package karantin;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +19,11 @@ public class CentralniRegistar {
     }
 
     public void zakaziSastanak(Sastanak sastanak) {
-
+        this.zakazaniSastanci.add(sastanak);
     }
 
     public void otkaziSastanak(Sastanak sastanak) {
-
+        this.zakazaniSastanci.remove(sastanak);
     }
 
     public void pokreniSastanak(Sastanak sastanak, Nastavnik nastavnik) {
@@ -40,7 +43,25 @@ public class CentralniRegistar {
     }
 
     public void stampajPrisustvoSortirano() {
-
+        String ime = "ime.txt";
+        FileWriter fw = null;
+        PrintWriter pw = null;
+        try {
+            fw = new FileWriter(ime);
+            pw = new PrintWriter(fw);
+            for (Sastanak sastanak: zakazaniSastanci) {
+                pw.println(sastanak);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            pw.close();
+            try {
+                fw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static CentralniRegistar getRegistar() {

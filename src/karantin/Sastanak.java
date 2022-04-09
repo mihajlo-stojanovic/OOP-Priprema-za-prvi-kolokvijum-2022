@@ -1,8 +1,6 @@
 package karantin;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Sastanak implements Comparable<Sastanak> {
 
@@ -15,6 +13,8 @@ public class Sastanak implements Comparable<Sastanak> {
     private boolean aktivan;
 
     private Set<UcesnikSastanka> ucesnici = new HashSet<>();
+
+    private List<Snimak> snimci = new ArrayList<>();
 
     private Nastavnik domacin;
 
@@ -121,5 +121,13 @@ public class Sastanak implements Comparable<Sastanak> {
                 ", ucesnici=" + ucesnici +
                 ", domacin=" + domacin +
                 '}';
+    }
+
+    public List<Snimak> getSnimci() {
+        return snimci;
+    }
+
+    public void setSnimci(List<Snimak> snimci) {
+        this.snimci = snimci;
     }
 }
